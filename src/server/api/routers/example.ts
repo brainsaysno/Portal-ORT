@@ -28,7 +28,7 @@ export const materiaRouter = createTRPCRouter({
           },
           siguientes: {
             include: {
-              materia_previa_de: true,
+              materia_siguiente: true,
             },
           },
         },
