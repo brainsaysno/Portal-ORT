@@ -1,5 +1,6 @@
 import { type NextPage } from "next";
 import Head from "next/head";
+import Layout from "../../components/Layout";
 import CustomButton from "../../components/MateriaButton";
 
 import { api } from "../../utils/api";
@@ -13,7 +14,7 @@ const Materias: NextPage = () => {
         <title>Materias</title>
         <meta name="description" content="Materias y previas" />
       </Head>
-      <main className="flex min-h-screen flex-col items-center bg-gradient-to-b from-[#2e026d] to-[#15162c] px-5 pb-10">
+      <Layout>
         <h1 className="py-5 text-3xl font-semibold text-white">Materias</h1>
         <div className="flex flex-row flex-wrap justify-center gap-2">
           {materia.data?.map(({ id, nombre }) => (
@@ -22,7 +23,7 @@ const Materias: NextPage = () => {
             </CustomButton>
           ))}
         </div>
-      </main>
+      </Layout>
     </>
   );
 };

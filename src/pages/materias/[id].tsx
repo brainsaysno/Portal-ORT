@@ -1,6 +1,7 @@
 import { type NextPage } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import Layout from "../../components/Layout";
 import CustomButton from "../../components/MateriaButton";
 
 import { api } from "../../utils/api";
@@ -21,7 +22,7 @@ const MateriaDetail: NextPage = () => {
           content={`Previas y siguientes de la materia ${id}`}
         />
       </Head>
-      <main className="flex min-h-screen flex-col items-center justify-center gap-20 bg-gradient-to-b from-[#2e026d] to-[#15162c]">
+      <Layout className="gap-20">
         {materia.data && (
           <>
             {materia.data.previas.length ? (
@@ -75,7 +76,7 @@ const MateriaDetail: NextPage = () => {
             )}
           </>
         )}
-      </main>
+      </Layout>
     </>
   );
 };
