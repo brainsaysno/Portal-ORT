@@ -41,6 +41,7 @@ const MateriaDetail: NextPage = () => {
                           href={`/materias/${id}`}
                           leftText={id}
                           key={id}
+                          hover
                         >
                           {nombre}
                         </CustomButton>
