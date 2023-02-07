@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { PropsWithChildren } from "react";
-import { UrlObject } from "url";
+import { type PropsWithChildren } from "react";
+import { type UrlObject } from "url";
 
 const CustomButton = ({
   leftText,

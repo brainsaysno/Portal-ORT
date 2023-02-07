@@ -2,7 +2,7 @@ import { type NextPage } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import Layout from "../../components/Layout";
-import CustomButton from "../../components/MateriaButton";
+import CustomButton from "../../components/CustomButton";
 
 import { api } from "../../utils/api";
 
@@ -10,16 +10,19 @@ const MateriaDetail: NextPage = () => {
   const router = useRouter();
   const { id } = router.query;
 
-  const intId = parseInt(id! as string);
+  let intId = typeof id === "string" ? parseInt(id) : 0;
+
+  if (isNaN(intId)) intId = 0;
+
   const materia = api.materia.getPreviasById.useQuery({ id: intId });
 
   return (
     <>
       <Head>
-        <title>Materia {id}</title>
+        <title>Materia {intId}</title>
         <meta
           name="description"
-          content={`Previas y siguientes de la materia ${id}`}
+          content={`Previas y siguientes de la materia ${intId}`}
         />
       </Head>
       <Layout className="gap-20">
@@ -33,7 +36,11 @@ const MateriaDetail: NextPage = () => {
                 <div className="flex flex-wrap items-center justify-center gap-2">
                   {materia.data.previas.map(
                     ({ materia_previa: { nombre, id } }) => (
-                      <CustomButton href={"/materias/" + id} leftText={id}>
+                      <CustomButton
+                        href={`/materias/${id}`}
+                        leftText={id}
+                        key={id}
+                      >
                         {nombre}
                       </CustomButton>
                     )
@@ -47,7 +54,7 @@ const MateriaDetail: NextPage = () => {
             )}
 
             <CustomButton
-              href={"/materias/" + materia.data.id}
+              href={`/materias/${materia.data.id}`}
               leftText={materia.data.id}
               principal
             >
@@ -59,7 +66,11 @@ const MateriaDetail: NextPage = () => {
                 <div className="flex flex-wrap items-center justify-center gap-2">
                   {materia.data.siguientes.map(
                     ({ materia_siguiente: { nombre, id } }) => (
-                      <CustomButton href={"/materias/" + id} leftText={id}>
+                      <CustomButton
+                        href={`/materias/${id}`}
+                        leftText={id}
+                        key={id}
+                      >
                         {nombre}
                       </CustomButton>
                     )
