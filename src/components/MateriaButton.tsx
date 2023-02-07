@@ -1,27 +1,41 @@
 import Link from "next/link";
+import { PropsWithChildren } from "react";
+import { UrlObject } from "url";
 
-const MateriaButton = ({
-  id,
-  nombre,
+const CustomButton = ({
+  leftText,
+  children,
+  rightText,
   principal = false,
-}: {
-  id: number;
-  nombre: string;
+  href,
+}: PropsWithChildren<{
+  leftText?: string | number;
+  rightText?: string | number;
   principal?: boolean;
-}) => (
-  <Link href={`/materia/${id}`}>
+  href: string | UrlObject;
+}>) => (
+  <Link href={href}>
     <div
       className={`w-100 my-2 border-2 border-black py-5 ${principal ? "bg-orange-300" : "bg-white"
         }`}
     >
-      <span
-        className={`border-r-4 px-4 ${principal ? "border-orange-400" : ""}`}
-      >
-        {id}
-      </span>
-      <span className="px-4">{nombre}</span>
+      {leftText && (
+        <span
+          className={`border-r-4 px-4 ${principal ? "border-orange-400" : ""}`}
+        >
+          {leftText}
+        </span>
+      )}
+      <span className="px-4">{children}</span>
+      {rightText && (
+        <span
+          className={`border-l-4 px-4 ${principal ? "border-orange-400" : ""}`}
+        >
+          {rightText}
+        </span>
+      )}
     </div>
   </Link>
 );
 
-export default MateriaButton;
+export default CustomButton;
