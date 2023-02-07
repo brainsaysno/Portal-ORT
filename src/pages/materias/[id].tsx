@@ -5,6 +5,7 @@ import Layout from "../../components/Layout";
 import CustomButton from "../../components/CustomButton";
 
 import { api } from "../../utils/api";
+import Spinner from "../../components/Spinner";
 
 const MateriaDetail: NextPage = () => {
   const router = useRouter();
@@ -25,8 +26,9 @@ const MateriaDetail: NextPage = () => {
           content={`Previas y siguientes de la materia ${intId}`}
         />
       </Head>
-      <Layout className="gap-20">
-        <div className="flex flex-col items-center ">
+      <Layout>
+        <div className="flex flex-col items-center gap-20">
+          {materia.isLoading && <Spinner className="h-12 w-12" />}
           {materia.data && (
             <>
               {materia.data.previas.length ? (

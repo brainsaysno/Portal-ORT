@@ -7,7 +7,7 @@ const Home: NextPage = () => {
   return (
     <>
       <Head>
-        <title>ORT como la gente</title>
+        <title>Gestión ORT (Como La Gente)</title>
         <meta name="description" content="Gestión ORT (como la gente)" />
       </Head>
       <Layout noHeader>
