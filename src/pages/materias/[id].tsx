@@ -26,67 +26,69 @@ const MateriaDetail: NextPage = () => {
         />
       </Head>
       <Layout className="gap-20">
-        {materia.data && (
-          <>
-            {materia.data.previas.length ? (
-              <div>
-                <h2 className="py-2 text-center text-xl font-semibold text-white">
-                  Previas
-                </h2>
-                <div className="flex flex-wrap items-center justify-center gap-2">
-                  {materia.data.previas.map(
-                    ({ materia_previa: { nombre, id } }) => (
-                      <CustomButton
-                        href={`/materias/${id}`}
-                        leftText={id}
-                        key={id}
-                      >
-                        {nombre}
-                      </CustomButton>
-                    )
-                  )}
+        <div className="flex flex-col items-center ">
+          {materia.data && (
+            <>
+              {materia.data.previas.length ? (
+                <div>
+                  <h2 className="py-2 text-center text-xl font-semibold text-white">
+                    Previas
+                  </h2>
+                  <div className="flex flex-wrap items-center justify-center gap-2">
+                    {materia.data.previas.map(
+                      ({ materia_previa: { nombre, id } }) => (
+                        <CustomButton
+                          href={`/materias/${id}`}
+                          leftText={id}
+                          key={id}
+                        >
+                          {nombre}
+                        </CustomButton>
+                      )
+                    )}
+                  </div>
                 </div>
-              </div>
-            ) : (
-              <h2 className="py-2 text-center text-xl font-semibold text-white">
-                Esta materia no tiene previas
-              </h2>
-            )}
-
-            <CustomButton
-              href={`/materias/${materia.data.id}`}
-              leftText={materia.data.id}
-              principal
-            >
-              {materia.data.nombre}
-            </CustomButton>
-
-            {materia.data.siguientes.length ? (
-              <div className="text-center">
-                <div className="flex flex-wrap items-center justify-center gap-2">
-                  {materia.data.siguientes.map(
-                    ({ materia_siguiente: { nombre, id } }) => (
-                      <CustomButton
-                        href={`/materias/${id}`}
-                        leftText={id}
-                        key={id}
-                      >
-                        {nombre}
-                      </CustomButton>
-                    )
-                  )}
-                </div>
+              ) : (
                 <h2 className="py-2 text-center text-xl font-semibold text-white">
-                  Siguientes
+                  Esta materia no tiene previas
                 </h2>
-              </div>
-            ) : (
-              <h2 className="py-2 text-center text-xl font-semibold text-white">
-                Esta materia no tiene siguientes
-              </h2>
-            )}
-          </>
-        )}
+              )}
+
+              <CustomButton
+                href={`/materias/${materia.data.id}`}
+                leftText={materia.data.id}
+                principal
+              >
+                {materia.data.nombre}
+              </CustomButton>
+
+              {materia.data.siguientes.length ? (
+                <div className="text-center">
+                  <div className="flex flex-wrap items-center justify-center gap-2">
+                    {materia.data.siguientes.map(
+                      ({ materia_siguiente: { nombre, id } }) => (
+                        <CustomButton
+                          href={`/materias/${id}`}
+                          leftText={id}
+                          key={id}
+                        >
+                          {nombre}
+                        </CustomButton>
+                      )
+                    )}
+                  </div>
+                  <h2 className="py-2 text-center text-xl font-semibold text-white">
+                    Siguientes
+                  </h2>
+                </div>
+              ) : (
+                <h2 className="py-2 text-center text-xl font-semibold text-white">
+                  Esta materia no tiene siguientes
+                </h2>
+              )}
+            </>
+          )}
+        </div>
       </Layout>
     </>
   );
