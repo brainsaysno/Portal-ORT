@@ -1,0 +1,25 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model materia {
+  id        Int      @id
+  nombre    String
+  previa_de previa[] @relation("previa_deToMateria")
+  previas   previa[] @relation("previasToMateria")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model previa {
+  materia           Int
+  de                Int
+  materia_previa_de materia? @relation("previa_deToMateria", fields: [de], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  materia_previa    materia? @relation("previasToMateria", fields: [materia], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([materia, de])
+}
