@@ -20,7 +20,7 @@ const CustomButton = ({
 }>) => (
   <Link href={href}>
     <div
-      className={`w-100 group my-2 border-2 border-black py-5 ${hover ? "hover:bg-orange-300" : ""
+      className={`w-100 group rounded border-2 border-black py-4 ${hover ? "hover:bg-orange-300" : ""
         } ${principal ? "bg-orange-300" : "bg-white"} ${className}`}
     >
       {leftText && (
@@ -31,7 +31,7 @@ const CustomButton = ({
           {leftText}
         </span>
       )}
-      <span className="px-4">{children}</span>
+      <span className="px-5">{children}</span>
       {rightText && (
         <span
           className={`border-l-4 px-4 ${hover ? "group-hover:border-orange-400" : ""
