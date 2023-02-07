@@ -1,10 +1,26 @@
+import Link from "next/link";
 import { type PropsWithChildren } from "react";
+import CustomButton from "./CustomButton";
 
 const Layout = ({
   children,
   className = "",
-}: PropsWithChildren<{ className?: string }>) => (
-  <div className="flex min-h-screen flex-col">
+  noHeader = false,
+}: PropsWithChildren<{ noHeader?: boolean; className?: string }>) => (
+  <div className="flex min-h-screen flex-col ">
+    {noHeader || (
+      <nav className="sticky top-0 flex gap-10 bg-[#110000] py-5 px-8">
+        <Link href="/">
+          <h1 className="text-xl font-bold text-white">Gestión ORT</h1>
+          <h2 className="text-sm font-bold text-white">(como la gente)</h2>
+        </Link>
+        <div className="hover:border-1 flex min-h-full items-center border-white">
+          <Link href="/materias" className="text-lg text-white">
+            Materias
+          </Link>
+        </div>
+      </nav>
+    )}
     <main
       className={`flex flex-grow items-center justify-center bg-gradient-to-b from-[#661020] to-[#360000] px-5 pb-10 ${className} `}
     >

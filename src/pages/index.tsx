@@ -10,7 +10,7 @@ const Home: NextPage = () => {
         <title>ORT como la gente</title>
         <meta name="description" content="Gestión ORT (como la gente)" />
       </Head>
-      <Layout>
+      <Layout noHeader>
         <div className="flex flex-col items-center ">
           <div className="py-10">
             <h1 className="text-8xl font-bold text-white">Gestión ORT</h1>
