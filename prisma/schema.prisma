@@ -8,10 +8,10 @@ datasource db {
 }
 
 model materia {
-  id        Int      @id
-  nombre    String
-  previa_de previa[] @relation("previa_deToMateria")
-  previas   previa[] @relation("previasToMateria")
+  id         Int      @id
+  nombre     String
+  previas    previa[] @relation("previa_deToMateria")
+  siguientes previa[] @relation("previasToMateria")
 }
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.

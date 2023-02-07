@@ -23,12 +23,12 @@ export const materiaRouter = createTRPCRouter({
         include: {
           previas: {
             include: {
-              materia_previa_de: true,
+              materia_previa: true,
             },
           },
-          previa_de: {
+          siguientes: {
             include: {
-              materia_previa: true,
+              materia_previa_de: true,
             },
           },
         },

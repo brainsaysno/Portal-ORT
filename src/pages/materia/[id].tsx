@@ -30,12 +30,12 @@ const MateriaDetail: NextPage = () => {
         )}
         {materia.data && (
           <p className="bg-white">
-            Previas: {JSON.stringify(materia.data.previa_de)}
+            Previas: {JSON.stringify(materia.data.previas)}
           </p>
         )}
         {materia.data && (
           <p className="bg-white">
-            Previa de: {JSON.stringify(materia.data.previas)}
+            Siguientes: {JSON.stringify(materia.data.siguientes)}
           </p>
         )}
       </main>
