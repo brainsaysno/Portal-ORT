@@ -27,7 +27,7 @@ const Materias: NextPage = () => {
       <Layout>
         <div className="flex flex-col items-center">
           <div className="flex flex-col items-center gap-5 py-5">
-            <h1 className=" text-3xl font-semibold text-white">Materias</h1>
+            <h1 className="text-3xl font-semibold text-white">Materias</h1>
             {materia.isSuccess && (
               <input
                 className="px-4 py-2"
@@ -37,7 +37,7 @@ const Materias: NextPage = () => {
               />
             )}
           </div>
-          <div className="flex flex-row flex-wrap justify-center gap-2">
+          <div className="flex flex-col justify-center gap-2 md:flex-row md:flex-wrap">
             {materia.isLoading && <Spinner className="h-12 w-12" />}
 
             {materia.data
@@ -50,6 +50,7 @@ const Materias: NextPage = () => {
                   leftText={id}
                   key={id}
                   hover
+                  className="w-full md:w-fit"
                 >
                   {nombre}
                 </CustomButton>
