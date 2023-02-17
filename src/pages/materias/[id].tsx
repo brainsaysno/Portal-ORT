@@ -7,16 +7,21 @@ import CustomButton from "../../components/CustomButton";
 import { api } from "../../utils/api";
 import Spinner from "../../components/Spinner";
 import Arrow from "../../components/Arrow";
+import { useEffect } from "react";
 
 const MateriaDetail: NextPage = () => {
   const router = useRouter();
   const { id } = router.query;
 
-  let intId = typeof id === "string" ? parseInt(id) : 0;
+  let intId = typeof id === "string" ? parseInt(id) : 1;
 
-  if (isNaN(intId)) intId = 0;
+  if (isNaN(intId)) intId = 1;
 
   const materia = api.materia.getPreviasById.useQuery({ id: intId });
+
+  useEffect(() => {
+    console.log(materia.data);
+  }, [materia]);
 
   return (
     <>
@@ -32,25 +37,23 @@ const MateriaDetail: NextPage = () => {
           {materia.isLoading && <Spinner className="h-12 w-12" />}
           {materia.data && (
             <>
-              {materia.data.previas.length ? (
+              {materia.data.siguientes.length ? (
                 <div className="w-full">
                   {/* <h2 className="invisible py-2 text-center text-xl font-semibold text-white md:visible"> */}
                   {/*   Previas */}
                   {/* </h2> */}
                   <div className="flex flex-col items-center justify-center gap-2 md:flex-row md:flex-wrap">
-                    {materia.data.previas.map(
-                      ({ materia_previa: { nombre, id } }) => (
-                        <CustomButton
-                          href={`/materias/${id}`}
-                          leftText={id}
-                          key={id}
-                          hover
-                          className="w-full md:w-fit"
-                        >
-                          {nombre}
-                        </CustomButton>
-                      )
-                    )}
+                    {materia.data.previas.map(({ previa: { nombre, id } }) => (
+                      <CustomButton
+                        href={`/materias/${id}`}
+                        leftText={id}
+                        key={id}
+                        hover
+                        className="w-full md:w-fit"
+                      >
+                        {nombre}
+                      </CustomButton>
+                    ))}
                   </div>
                 </div>
               ) : (
@@ -78,7 +81,7 @@ const MateriaDetail: NextPage = () => {
                   {/* </h2> */}
                   <div className="flex flex-wrap items-center justify-center gap-2">
                     {materia.data.siguientes.map(
-                      ({ materia_siguiente: { nombre, id } }) => (
+                      ({ siguiente: { nombre, id } }) => (
                         <CustomButton
                           href={`/materias/${id}`}
                           leftText={id}

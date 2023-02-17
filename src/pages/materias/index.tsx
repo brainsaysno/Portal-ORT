@@ -14,7 +14,14 @@ const normalizeString = (str: string): string =>
     .replace(/[\u0300-\u036f]/g, "");
 
 const Materias: NextPage = () => {
-  const materia = api.materia.getAll.useQuery();
+  const careras = api.carrera.getAll.useQuery();
+  const carreraSeleccionada = api.carrera.getMateriasById.useQuery({
+    id: 2485,
+  });
+
+  const materias = carreraSeleccionada.data
+    ? carreraSeleccionada.data.materias
+    : [];
 
   const [filterPattern, setFilterPattern] = useState("");
 
@@ -28,7 +35,7 @@ const Materias: NextPage = () => {
         <div className="flex flex-col items-center">
           <div className="flex flex-col items-center gap-5 py-5">
             <h1 className="text-3xl font-semibold text-white">Materias</h1>
-            {materia.isSuccess && (
+            {carreraSeleccionada.isSuccess && (
               <input
                 className="px-4 py-2"
                 onChange={(e) => setFilterPattern(e.target.value)}
@@ -38,10 +45,10 @@ const Materias: NextPage = () => {
             )}
           </div>
           <div className="flex flex-col justify-center gap-2 md:flex-row md:flex-wrap">
-            {materia.isLoading && <Spinner className="h-12 w-12" />}
+            {carreraSeleccionada.isLoading && <Spinner className="h-12 w-12" />}
 
-            {materia.data
-              ?.filter(({ nombre }) =>
+            {materias
+              .filter(({ nombre }) =>
                 normalizeString(nombre).includes(normalizeString(filterPattern))
               )
               .map(({ id, nombre }) => (

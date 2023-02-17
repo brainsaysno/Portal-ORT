@@ -3,23 +3,42 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
 }
 
 model materia {
-  id         Int      @id
+  id         Int       @id
   nombre     String
-  previas    previa[] @relation("siguienteToMateria")
-  siguientes previa[] @relation("previaToMateria")
+  previas    previa[]  @relation("siguienteToMateria")
+  siguientes previa[]  @relation("previaToMateria")
+  carreras   carrera[]
 }
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
 model previa {
-  materia           Int
-  de                Int
-  materia_siguiente materia @relation("siguienteToMateria", fields: [de], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  materia_previa    materia @relation("previaToMateria", fields: [materia], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  previaId    Int
+  siguienteId Int
+  previa      materia @relation("previaToMateria", fields: [siguienteId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  siguiente   materia @relation("siguienteToMateria", fields: [previaId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
-  @@id([materia, de])
+  @@id([previaId, siguienteId])
+  @@index([siguienteId])
+  @@index([previaId])
+}
+
+model carrera {
+  id       Int       @id
+  nombre   String
+  materias materia[]
+}
+
+model carreraTomateria {
+  A Int
+  B Int
+
+  @@unique([A, B], map: "_carreraTomateria_AB_unique")
+  @@index([B], map: "_carreraTomateria_B_index")
+  @@map("_carreraTomateria")
 }

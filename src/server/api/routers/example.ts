@@ -2,11 +2,13 @@ import { z } from "zod";
 
 import { createTRPCRouter, publicProcedure } from "../trpc";
 
+const ID = z.number().positive().int();
+
 export const materiaRouter = createTRPCRouter({
   getById: publicProcedure
-    .input(z.object({ id: z.number().positive().int() }))
+    .input(z.object({ id: ID }))
     .query(({ ctx, input }) => {
-      return ctx.prisma.materia.findFirst({
+      return ctx.prisma.materia.findUnique({
         where: {
           id: input.id,
         },
@@ -16,21 +18,49 @@ export const materiaRouter = createTRPCRouter({
     return ctx.prisma.materia.findMany();
   }),
   getPreviasById: publicProcedure
-    .input(z.object({ id: z.number().positive().int() }))
+    .input(z.object({ id: ID }))
     .query(({ ctx, input }) => {
-      return ctx.prisma.materia.findFirst({
+      return ctx.prisma.materia.findUnique({
         where: { id: input.id },
         include: {
           previas: {
             include: {
-              materia_previa: true,
+              previa: true,
             },
           },
           siguientes: {
             include: {
-              materia_siguiente: true,
+              siguiente: true,
             },
           },
+        },
+      });
+    }),
+});
+
+export const carreraRouter = createTRPCRouter({
+  getAll: publicProcedure.query(({ ctx }) => {
+    return [
+      {
+        id: 1,
+        nombre: "Ingeniería en Sistemas",
+      },
+    ];
+    // return ctx.prisma.materia.findMany();
+  }),
+  getMateriasById: publicProcedure
+    .input(
+      z.object({
+        id: ID,
+      })
+    )
+    .query(({ ctx, input }) => {
+      return ctx.prisma.carrera.findUnique({
+        where: {
+          id: input.id,
+        },
+        include: {
+          materias: true,
         },
       });
     }),
