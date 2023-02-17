@@ -14,7 +14,7 @@ const normalizeString = (str: string): string =>
     .replace(/[\u0300-\u036f]/g, "");
 
 const Materias: NextPage = () => {
-  const careras = api.carrera.getAll.useQuery();
+  // const careras = api.carrera.getAll.useQuery();
   const carreraSeleccionada = api.carrera.getMateriasById.useQuery({
     id: 2485,
   });

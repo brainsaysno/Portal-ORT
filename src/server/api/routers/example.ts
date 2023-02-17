@@ -40,13 +40,7 @@ export const materiaRouter = createTRPCRouter({
 
 export const carreraRouter = createTRPCRouter({
   getAll: publicProcedure.query(({ ctx }) => {
-    return [
-      {
-        id: 1,
-        nombre: "Ingeniería en Sistemas",
-      },
-    ];
-    // return ctx.prisma.materia.findMany();
+    return ctx.prisma.carrera.findMany();
   }),
   getMateriasById: publicProcedure
     .input(

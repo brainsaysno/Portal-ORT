@@ -7,7 +7,6 @@ import CustomButton from "../../components/CustomButton";
 import { api } from "../../utils/api";
 import Spinner from "../../components/Spinner";
 import Arrow from "../../components/Arrow";
-import { useEffect } from "react";
 
 const MateriaDetail: NextPage = () => {
   const router = useRouter();
