@@ -19,10 +19,6 @@ const MateriaDetail: NextPage = () => {
 
   const materia = api.materia.getPreviasById.useQuery({ id: intId });
 
-  useEffect(() => {
-    console.log(materia.data);
-  }, [materia]);
-
   return (
     <>
       <Head>
@@ -37,7 +33,7 @@ const MateriaDetail: NextPage = () => {
           {materia.isLoading && <Spinner className="h-12 w-12" />}
           {materia.data && (
             <>
-              {materia.data.siguientes.length ? (
+              {materia.data.previas.length ? (
                 <div className="w-full">
                   {/* <h2 className="invisible py-2 text-center text-xl font-semibold text-white md:visible"> */}
                   {/*   Previas */}

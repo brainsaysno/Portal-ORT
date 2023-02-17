@@ -20,8 +20,8 @@ model materia {
 model previa {
   previaId    Int
   siguienteId Int
-  previa      materia @relation("previaToMateria", fields: [siguienteId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  siguiente   materia @relation("siguienteToMateria", fields: [previaId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  previa      materia @relation("previaToMateria", fields: [previaId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  siguiente   materia @relation("siguienteToMateria", fields: [siguienteId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   @@id([previaId, siguienteId])
   @@index([siguienteId])
