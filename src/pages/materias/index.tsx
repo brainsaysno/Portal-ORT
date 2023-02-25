@@ -63,7 +63,9 @@ const Materias: NextPage = () => {
               >
                 <option selected>Todas las carreras</option>
                 {carrerasQuery.data.map((carrera) => (
-                  <option value={carrera.id}>{carrera.nombre}</option>
+                  <option value={carrera.id} key={carrera.id}>
+                    {carrera.nombre}
+                  </option>
                 ))}
               </select>
             )}
