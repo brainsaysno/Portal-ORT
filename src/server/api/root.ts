@@ -1,5 +1,5 @@
+import { carreraRouter, materiaRouter } from "./routers";
 import { createTRPCRouter } from "./trpc";
-import { carreraRouter, materiaRouter } from "./routers/example";
 
 /**
  * This is the primary router for your server.

@@ -16,7 +16,6 @@ model materia {
   carreras   carrera[]
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
 model previa {
   previaId    Int
   siguienteId Int
