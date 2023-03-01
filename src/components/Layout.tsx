@@ -10,8 +10,8 @@ const Layout = ({
     {noHeader || (
       <nav className="sticky top-0 flex gap-10 bg-[#110000] py-5 px-14">
         <Link href="/">
-          <h1 className="text-xl font-bold text-white">Gestión ORT</h1>
-          <h2 className="text-sm font-bold text-white">(como la gente)</h2>
+          <h1 className="text-xl font-bold text-white">Portal ORT</h1>
+          <h2 className="text-xs font-bold text-white">(no oficial)</h2>
         </Link>
         <div className="hover:border-1 flex min-h-full items-center border-white">
           <Link href="/materias" className="text-lg text-white">
