@@ -1,0 +1,23 @@
+name: PR Build and Testing
+run-name: ${{ github.actor }} is building and testing a PR on ${{ github.ref_name }}
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@646cdf48217256a3d0b80361c5a50727664284f2
+        with:
+          version: 7.28.0
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: "19"
+      - run: pnpm install
+      - run: pnpm build
+      - run: pnpm test
