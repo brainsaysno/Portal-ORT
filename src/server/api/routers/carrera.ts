@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { ID } from "@utils/schemas";
+import { ID } from "../../../utils/schemas";
 import { createTRPCRouter, publicProcedure } from "../trpc";
 
 export const carreraRouter = createTRPCRouter({
