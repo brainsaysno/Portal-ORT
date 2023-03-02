@@ -64,7 +64,7 @@
       <li><a href="#apoyo-economico">Apoyo económico</a></li>
       </ul>
     </li>
-    <!-- <li><a href="#licencia">Licencia</a></li> -->
+    <li><a href="#licencia">Licencia</a></li>
     <li><a href="#contacto">Contacto</a></li>
   </ol>
 </details>
@@ -187,9 +187,9 @@ Si encontrás un [issue](https://github.com/brainsaysno/Portal-ORT/issues) que q
 
 Si en cambio deseas apoyar económicamente a los desarrolladores de Portal ORT puedes hacerlo a través de [PayPal](https://paypal.me/brainsaysno).
 
-<!-- ## Licencia -->
-<!---->
-<!-- Distribuido bajo la licencia de MIT. Ver [licencia](LICENSE) para más información. -->
+## Licencia
+
+Distribuido bajo la licencia GPL-3.0. Ver [licencia](LICENSE) para más información.
 
 ## Contacto
 
