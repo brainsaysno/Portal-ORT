@@ -1,7 +1,15 @@
 {
-  "name": "previas",
+  "name": "portal-ort",
   "version": "0.1.0",
-  "private": true,
+  "author": {
+    "name": "Nicolás Russo",
+    "email": "nicolas.russo.ortiz@gmail.com"
+  },
+  "homepage": "https://www.github.com/brainsaysno/Portal-ORT#readme",
+  "bugs": {
+    "url": "https://www.github.com/brainsaysno/Portal-ORT/issues"
+  },
+  "license": "GPL-3.0",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "build": "next build",
