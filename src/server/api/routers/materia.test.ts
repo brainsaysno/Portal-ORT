@@ -1,6 +1,6 @@
 import { type inferProcedureInput } from "@trpc/server";
-import { beforeAll, describe, expect, test } from "vitest";
-import { AppRouter, appRouter } from "../root";
+import { describe, expect, test } from "vitest";
+import { type AppRouter, appRouter } from "../root";
 import { createTRPCContext } from "../trpc";
 
 describe("Materia router", () => {
