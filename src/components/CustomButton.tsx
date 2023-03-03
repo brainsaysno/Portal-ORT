@@ -18,9 +18,9 @@ const CustomButton = ({
   href: string | UrlObject;
   className?: string;
 }>) => (
-  <Link href={href} className={className}>
+  <Link href={href}>
     <div
-      className={`min-w-100 group flex rounded border-2 border-black py-4 ${hover ? "hover:bg-orange-300" : ""
+      className={`min-w-100 group flex rounded-xl border-2 border-black py-4 ${hover ? "hover:bg-orange-300" : ""
         } ${principal ? "bg-orange-300" : "bg-white"} ${className}`}
     >
       {leftText && (
