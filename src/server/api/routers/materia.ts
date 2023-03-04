@@ -16,6 +16,25 @@ export const materiaRouter = createTRPCRouter({
   getAll: publicProcedure.query(({ ctx }) => {
     return ctx.prisma.materia.findMany();
   }),
+  getCursables: publicProcedure
+    .input(ID.array().nullable())
+    .query(({ ctx, input }) => {
+      if (input === null) return ctx.prisma.materia.findMany();
+      return ctx.prisma.materia.findMany({
+        where: {
+          id: {
+            notIn: input,
+          },
+          previas: {
+            every: {
+              previaId: {
+                in: input,
+              },
+            },
+          },
+        },
+      });
+    }),
   getPreviasById: publicProcedure
     .input(z.object({ id: ID }))
     .query(({ ctx, input }) => {

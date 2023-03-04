@@ -32,8 +32,8 @@ const Arrow = ({
         x2="40"
         y2="50"
         stroke={color} //{color}
-        stroke-width="10"
-        marker-end="url(#arrowhead)"
+        strokeWidth="10"
+        markerEnd="url(#arrowhead)"
       />
     </svg>
   );

@@ -14,7 +14,6 @@ export default function Navbar() {
 
   return (
     <nav className="z-50 flex justify-around gap-10 bg-primary py-5 px-28">
-      {/* sticky top-0 */}
       <div className="flex grow items-center justify-center md:justify-start">
         <Link href="/">
           <Logo className="w-36" />
@@ -32,12 +31,6 @@ export default function Navbar() {
           ))}
         </div>
       </div>
-      {/* <CustomButton */}
-      {/*   href="https://www.github.com/brainsaysno/Portal-ORT" */}
-      {/*   className="border-white bg-primary py-2 text-white" */}
-      {/* > */}
-      {/*   Página del proyecto */}
-      {/* </CustomButton> */}
     </nav>
   );
 }
