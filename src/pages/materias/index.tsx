@@ -54,7 +54,7 @@ const Materias: NextPage = () => {
         <h1 className="text-md h-fit bg-white py-2 text-center text-charcoal drop-shadow-lg">
           Materias
         </h1>
-        <div className="flex flex-col items-center gap-5 px-36 py-5">
+        <div className="flex flex-col items-center gap-5 px-10 py-5 md:px-36">
           <div className="flex w-full flex-col items-center justify-around gap-4 md:flex-row">
             {carrerasQuery.isSuccess && (
               <select
