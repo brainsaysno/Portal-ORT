@@ -28,7 +28,7 @@ const MateriaDetail: NextPage = () => {
         />
       </Head>
       <Layout>
-        <div className="flex flex-col items-center gap-5 py-8">
+        <div className="flex flex-col items-center justify-center gap-5 py-8 px-10 py-5 md:px-36">
           {materia.isLoading && <Spinner className="h-12 w-12" />}
           {materia.data && (
             <>
@@ -91,7 +91,7 @@ const MateriaDetail: NextPage = () => {
                   </div>
                 </div>
               ) : (
-                <h2 className="py-2 text-center text-xl font-semibold text-white">
+                <h2 className="py-2 text-center text-xl text-charcoal">
                   Esta materia no tiene siguientes
                 </h2>
               )}
