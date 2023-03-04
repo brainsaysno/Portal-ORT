@@ -52,7 +52,7 @@ const MateriaDetail: NextPage = () => {
                   </div>
                 </div>
               ) : (
-                <h2 className="py-2 text-center text-xl font-semibold text-white">
+                <h2 className="py-2 text-center text-xl text-charcoal">
                   Esta materia no tiene previas
                 </h2>
               )}

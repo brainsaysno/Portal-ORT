@@ -1,6 +1,6 @@
 const Spinner = ({ className = "" }: { className?: string }) => (
   <svg
-    className={`animate-spin text-white ${className}`}
+    className={`animate-spin text-charcoal ${className}`}
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
