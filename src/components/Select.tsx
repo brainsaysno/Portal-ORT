@@ -2,7 +2,7 @@ import { Fragment, useEffect, useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { BsCheck, BsChevronUp } from "react-icons/bs";
 
-function classNames(...classes: any) {
+function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
@@ -23,7 +23,7 @@ export default function Select<T>({
 
   useEffect(() => {
     onChange(selected);
-  }, [selected]);
+  }, [selected, onChange]);
 
   return (
     <Listbox value={selected} onChange={setSelected}>

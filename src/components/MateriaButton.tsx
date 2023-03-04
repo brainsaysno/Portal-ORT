@@ -16,7 +16,7 @@ const MateriaButton = ({
   hoverable?: boolean;
   // done?: boolean;
 }) => {
-  const [aprobadas, _] = useLocalStorage("idsAprobadas", [] as number[]);
+  const [aprobadas] = useLocalStorage("idsAprobadas", [] as number[]);
 
   const done =
     forceDone !== undefined ? forceDone : aprobadas.includes(materia.id);
@@ -25,15 +25,15 @@ const MateriaButton = ({
     <Link href={`/materias/${materia.id}`} className={className}>
       <div
         className={`min-w-100 group flex rounded-md bg-white py-4 text-charcoal drop-shadow-xl 
-        ${hoverable && "hover:bg-bg-hover"}
-        ${principal && "text-active"} 
-        ${done && "bg-green-500 !text-white"}
+        ${hoverable ? "hover:bg-bg-hover" : ""}
+        ${principal ? "text-active" : ""} 
+        ${done ? "bg-green-500 !text-white" : ""}
       `}
       >
         <span
           className={`border-r-4 border-gray-100 px-4
-            ${hoverable && "group-hover:border-gray-300"}
-            ${done && "border-green-600"}
+            ${hoverable ? "group-hover:border-gray-300" : ""}
+            ${done ? "border-green-600" : ""}
           `}
         >
           {materia.id}
