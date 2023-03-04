@@ -13,7 +13,8 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="sticky top-0 flex justify-around gap-10 bg-[#110000] py-5 px-28">
+    <nav className="z-50 flex justify-around gap-10 bg-primary py-5 px-28">
+      {/* sticky top-0 */}
       <div className="flex grow items-center justify-center md:justify-start">
         <Link href="/">
           <Logo className="w-36" />
@@ -23,7 +24,7 @@ export default function Navbar() {
             <Link
               key={link.url}
               href={link.url}
-              className={`text-lg ${link.url === currentPath ? "text-white" : "text-gray-300"
+              className={`text-lg ${link.url === currentPath ? "text-white" : "text-timber"
                 }`}
             >
               {link.name}

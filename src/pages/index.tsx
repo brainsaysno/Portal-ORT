@@ -15,8 +15,8 @@ const Home: NextPage = () => {
         />
       </Head>
       <Layout noHeader>
-        <div className="flex flex-col items-center">
-          <Logo className="w-[80vw] py-10 md:w-[50vw]" />
+        <div className="flex flex-col items-center justify-center">
+          <Logo primary className="w-[80vw] py-10 md:w-[50vw]" />
           <CustomButton href="/materias">Materias</CustomButton>
         </div>
       </Layout>

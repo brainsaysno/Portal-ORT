@@ -5,7 +5,7 @@ import { type UrlObject } from "url";
 const CustomButton = ({
   leftText,
   children,
-  rightText,
+  // rightText,
   principal = false,
   href,
   className = "",
@@ -18,28 +18,28 @@ const CustomButton = ({
   href: string | UrlObject;
   className?: string;
 }>) => (
-  <Link href={href}>
+  <Link href={href} className={className}>
     <div
-      className={`min-w-100 group flex rounded-xl border-2 border-black py-4 ${hover ? "hover:bg-orange-300" : ""
-        } ${principal ? "bg-orange-300" : "bg-white"} ${className}`}
+      className={`min-w-100 group flex rounded-md bg-white py-4 text-charcoal drop-shadow-xl ${hover ? "hover:bg-hover" : ""
+        } ${principal ? "text-active" : ""}`}
     >
       {leftText && (
         <span
-          className={`border-r-4 px-4 ${hover ? "group-hover:border-orange-400" : ""
-            } ${principal ? "border-orange-400" : ""}`}
+          className={`border-r-4 border-gray-100 px-4 text-charcoal ${hover ? "group-hover:border-gray-300" : ""
+            } ${principal ? "text-active" : ""}`}
         >
           {leftText}
         </span>
       )}
       <span className="px-5 text-left">{children}</span>
-      {rightText && (
-        <span
-          className={`border-l-4 px-4 ${hover ? "group-hover:border-orange-400" : ""
-            } ${principal ? "border-orange-400" : ""}`}
-        >
-          {rightText}
-        </span>
-      )}
+      {/* {rightText && ( */}
+      {/*   <span */}
+      {/*     className={`border-l-4 px-4 ${hover ? "group-hover:border-orange-400" : "" */}
+      {/*       } ${principal ? "border-orange-400" : ""}`} */}
+      {/*   > */}
+      {/*     {rightText} */}
+      {/*   </span> */}
+      {/* )} */}
     </div>
   </Link>
 );
