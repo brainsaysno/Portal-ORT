@@ -1,8 +1,8 @@
 import { type NextPage } from "next";
 import Head from "next/head";
 import Layout from "../components/Layout";
-import CustomButton from "../components/CustomButton";
 import Logo from "components/Logo";
+import Link from "next/link";
 
 const Home: NextPage = () => {
   return (
@@ -17,7 +17,12 @@ const Home: NextPage = () => {
       <Layout noHeader>
         <div className="flex flex-col items-center justify-center">
           <Logo primary className="w-[80vw] py-10 md:w-[50vw]" />
-          <CustomButton href="/materias">Materias</CustomButton>
+          <Link
+            className="min-w-100 rounded-md bg-white px-4 py-4 text-charcoal drop-shadow-xl"
+            href="/materias"
+          >
+            Materias
+          </Link>
         </div>
       </Layout>
     </>

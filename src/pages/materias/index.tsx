@@ -1,18 +1,25 @@
 import { type NextPage } from "next";
 import Head from "next/head";
 import Layout from "../../components/Layout";
-import CustomButton from "../../components/CustomButton";
 
 import { api } from "../../utils/api";
 import Spinner from "../../components/Spinner";
 import { useState } from "react";
-import { type materia } from "@prisma/client";
+import { type carrera, type materia } from "@prisma/client";
+import MateriaButton from "@components/MateriaButton";
+import Select from "@components/Select";
 
 const normalizeString = (str: string): string =>
   str
     .toUpperCase()
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "");
+
+// const enum Filtros {
+//   Todas = "Todas las materias",
+//   Aprobadas = "Materias aprobadas",
+//   Cursables = "Materias cursables",
+// }
 
 const Materias: NextPage = () => {
   const [idCarreraSeleccionada, setIdCarreraSeleccionada] = useState<
@@ -42,7 +49,10 @@ const Materias: NextPage = () => {
     },
   });
 
-  const [filterPattern, setFilterPattern] = useState("");
+  const [searchPattern, setSearchPattern] = useState("");
+
+  const filterCriteria = ({ nombre }: materia): boolean =>
+    normalizeString(nombre).includes(normalizeString(searchPattern));
 
   return (
     <>
@@ -55,38 +65,44 @@ const Materias: NextPage = () => {
           Materias
         </h1>
         <div className="flex flex-col items-center gap-5 px-10 py-5 md:px-36">
-          <div className="flex w-full flex-col items-center justify-around gap-4 md:flex-row">
-            {carrerasQuery.isSuccess && (
-              <select
-                className="h-10 w-3/4 rounded bg-white px-4 py-2 drop-shadow-sm md:w-56"
-                onChange={(e) => {
-                  const parsed = parseInt(e.target.value);
-                  setIdCarreraSeleccionada(isNaN(parsed) ? null : parsed);
-                }}
-              >
-                <option selected>Todas las carreras</option>
-                {carrerasQuery.data.map((carrera) => (
-                  <option value={carrera.id} key={carrera.id}>
-                    {carrera.nombre}
-                  </option>
-                ))}
-              </select>
+          {/* Filter tab */}
+
+          <div className="grid w-full grid-rows-3 gap-4 md:grid-cols-3 md:grid-rows-none">
+            {carrerasQuery.isSuccess && carrerasQuery.data.length > 0 && (
+              <Select
+                items={carrerasQuery.data as [carrera, ...carrera[]]}
+                renderLabel={(carrera) => carrera.nombre}
+                onChange={(carrera) =>
+                  setIdCarreraSeleccionada(carrera ? carrera.id : null)
+                }
+                defaultLabel="Todas las carreras"
+              />
             )}
+            {/* {materiasQuery.isSuccess && ( */}
+            {/*   <Select */}
+            {/*     items={[Filtros.Aprobadas, Filtros.Cursables]} */}
+            {/*     defaultLabel="Todas las materias" */}
+            {/*     renderLabel={(f) => f} */}
+            {/*     onChange={console.log} */}
+            {/*   /> */}
+            {/* )} */}
+
             {materiasQuery.isSuccess && (
               <input
-                className="h-10 w-3/4 rounded px-4 py-2 drop-shadow-sm md:w-96"
-                onChange={(e) => setFilterPattern(e.target.value)}
-                value={filterPattern}
+                className="rounded px-4 drop-shadow-sm md:w-full"
+                onChange={(e) => setSearchPattern(e.target.value)}
+                value={searchPattern}
                 placeholder="Buscar"
               />
             )}
           </div>
+
+          {/* Materias */}
+
           {materiasQuery.isLoading && <Spinner className="h-12 w-12" />}
           {materiasQuery.isSuccess && (
             <MateriasButtons
-              materias={materiasQuery.data.filter(({ nombre }) =>
-                normalizeString(nombre).includes(normalizeString(filterPattern))
-              )}
+              materias={materiasQuery.data.filter(filterCriteria)}
             />
           )}
         </div>
@@ -97,16 +113,13 @@ const Materias: NextPage = () => {
 
 const MateriasButtons = ({ materias }: { materias: materia[] }) => (
   <div className="flex flex-col justify-center gap-2 md:flex-row md:flex-wrap">
-    {materias.map(({ id, nombre }) => (
-      <CustomButton
-        href={`/materias/${id}`}
-        leftText={id}
-        key={id}
-        hover
-        className="w-full grow md:w-fit"
-      >
-        {nombre}
-      </CustomButton>
+    {materias.map((materia) => (
+      <MateriaButton
+        materia={materia}
+        key={materia.id}
+        hoverable
+        className="w-full md:w-fit"
+      />
     ))}
   </div>
 );

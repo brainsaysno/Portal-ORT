@@ -2,15 +2,22 @@ import { type NextPage } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import Layout from "../../components/Layout";
-import CustomButton from "../../components/CustomButton";
 
 import { api } from "../../utils/api";
 import Spinner from "../../components/Spinner";
 import Arrow from "../../components/Arrow";
+import { useLocalStorage } from "hooks/useLocalStorage";
+import { arrayFromSet, parseSet } from "@utils/common";
+import MateriaButton from "@components/MateriaButton";
 
 const MateriaDetail: NextPage = () => {
   const router = useRouter();
   const { id } = router.query;
+
+  const [aprobadas, setAprobadas] = useLocalStorage(
+    "idsAprobadas",
+    [] as number[]
+  );
 
   let intId = typeof id === "string" ? parseInt(id) : 1;
 
@@ -34,20 +41,14 @@ const MateriaDetail: NextPage = () => {
             <>
               {materia.data.previas.length ? (
                 <div className="w-full">
-                  {/* <h2 className="invisible py-2 text-center text-xl font-semibold text-white md:visible"> */}
-                  {/*   Previas */}
-                  {/* </h2> */}
                   <div className="flex flex-col items-center justify-center gap-2 md:flex-row md:flex-wrap">
-                    {materia.data.previas.map(({ previa: { nombre, id } }) => (
-                      <CustomButton
-                        href={`/materias/${id}`}
-                        leftText={id}
-                        key={id}
-                        hover
+                    {materia.data.previas.map(({ previa }) => (
+                      <MateriaButton
+                        materia={previa}
+                        key={previa.id}
+                        hoverable
                         className="w-full md:w-fit"
-                      >
-                        {nombre}
-                      </CustomButton>
+                      />
                     ))}
                   </div>
                 </div>
@@ -57,37 +58,48 @@ const MateriaDetail: NextPage = () => {
                 </h2>
               )}
 
-              <Arrow className="mx-auto h-24" />
-              <CustomButton
-                href={`/materias/${materia.data.id}`}
-                leftText={materia.data.id}
-                principal
-                className="w-full md:w-fit"
-              >
-                {materia.data.nombre}
-              </CustomButton>
+              <Arrow className="h-24" />
+              <div className="grid grid-rows-2 md:grid-cols-3 md:grid-rows-none">
+                <MateriaButton
+                  materia={materia.data}
+                  forceDone={parseSet(aprobadas).has(materia.data.id)}
+                  principal
+                  className="w-full md:col-start-2 md:w-fit"
+                />
+                <div className="flex items-center justify-center ">
+                  <input
+                    type="checkbox"
+                    className="align-middle  accent-green-400"
+                    checked={parseSet(aprobadas).has(materia.data.id)}
+                    onChange={(e) => {
+                      if (!materia.data) return;
 
-              <Arrow className="mx-auto h-24" />
+                      const set = parseSet(aprobadas);
+                      if (e.target.checked) {
+                        set.add(materia.data.id);
+                      } else {
+                        set.delete(materia.data.id);
+                      }
+                      setAprobadas(arrayFromSet(set));
+                    }}
+                  />
+                  <label className="px-2 text-lg">¿Aprobada?</label>
+                </div>
+              </div>
+
+              <Arrow className="h-24" />
 
               {materia.data.siguientes.length ? (
                 <div className="text-center">
-                  {/* <h2 className="invisible py-2 text-center text-xl font-semibold text-white md:visible"> */}
-                  {/*   Siguientes */}
-                  {/* </h2> */}
                   <div className="flex flex-wrap items-center justify-center gap-2">
-                    {materia.data.siguientes.map(
-                      ({ siguiente: { nombre, id } }) => (
-                        <CustomButton
-                          href={`/materias/${id}`}
-                          leftText={id}
-                          hover
-                          key={id}
-                          className="w-full md:w-fit"
-                        >
-                          {nombre}
-                        </CustomButton>
-                      )
-                    )}
+                    {materia.data.siguientes.map(({ siguiente }) => (
+                      <MateriaButton
+                        materia={siguiente}
+                        key={siguiente.id}
+                        hoverable
+                        className="w-full md:w-fit"
+                      />
+                    ))}
                   </div>
                 </div>
               ) : (
