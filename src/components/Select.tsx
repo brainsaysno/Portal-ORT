@@ -30,7 +30,7 @@ export default function Select<T>({
       {({ open }) => (
         <>
           <div className="relative">
-            <Listbox.Button className="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm sm:leading-6">
+            <Listbox.Button className="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-primary sm:text-sm sm:leading-6">
               <span className="flex items-center">
                 <span className="ml-3 block truncate">
                   {selected === null ? defaultLabel : renderLabel(selected)}
@@ -55,7 +55,7 @@ export default function Select<T>({
                 <Listbox.Option
                   className={({ active }) =>
                     classNames(
-                      active ? "bg-indigo-600 text-white" : "text-gray-900",
+                      active ? "bg-primary text-white" : "text-gray-900",
                       "relative cursor-default select-none py-2 pl-3 pr-9"
                     )
                   }
@@ -77,7 +77,7 @@ export default function Select<T>({
                       {selected ? (
                         <span
                           className={classNames(
-                            active ? "text-white" : "text-indigo-600",
+                            active ? "text-white" : "text-primary",
                             "absolute inset-y-0 right-0 flex items-center pr-4"
                           )}
                         >
@@ -92,7 +92,7 @@ export default function Select<T>({
                     key={renderLabel(item)}
                     className={({ active }) =>
                       classNames(
-                        active ? "bg-indigo-600 text-white" : "text-gray-900",
+                        active ? "bg-primary text-white" : "text-gray-900",
                         "relative cursor-default select-none py-2 pl-3 pr-9"
                       )
                     }
@@ -114,7 +114,7 @@ export default function Select<T>({
                         {selected ? (
                           <span
                             className={classNames(
-                              active ? "text-white" : "text-indigo-600",
+                              active ? "text-white" : "text-primary",
                               "absolute inset-y-0 right-0 flex items-center pr-4"
                             )}
                           >
