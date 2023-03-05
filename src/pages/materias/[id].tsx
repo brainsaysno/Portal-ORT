@@ -63,7 +63,6 @@ const MateriaDetail: NextPage = () => {
                 <MateriaButton
                   materia={materia.data}
                   forceDone={parseSet(aprobadas).has(materia.data.id)}
-                  principal
                   className="w-full md:col-start-2 md:w-fit"
                 />
                 <div className="flex items-center justify-center ">
