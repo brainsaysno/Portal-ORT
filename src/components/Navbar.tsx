@@ -18,7 +18,7 @@ export default function Navbar() {
         <Link href="/">
           <Logo className="w-36" />
         </Link>
-        <div className="mx-16 flex hidden  items-center justify-center gap-8 md:block">
+        <div className="mx-16 flex hidden items-center justify-center gap-8 md:block">
           {links.map((link) => (
             <Link
               key={link.url}
