@@ -1,6 +1,5 @@
 import { z } from "zod";
 import { ID } from "../../../utils/schemas";
-
 import { createTRPCRouter, publicProcedure } from "../trpc";
 
 export const materiaRouter = createTRPCRouter({
@@ -38,20 +37,51 @@ export const materiaRouter = createTRPCRouter({
   getPreviasById: publicProcedure
     .input(z.object({ id: ID }))
     .query(({ ctx, input }) => {
-      return ctx.prisma.materia.findUnique({
+      const data = ctx.prisma.materia.findUnique({
         where: { id: input.id },
         include: {
           previas: {
             include: {
-              previa: true,
+              previa: {
+                include: {
+                  previas: {
+                    include: {
+                      previa: true,
+                    },
+                  },
+                  siguientes: {
+                    include: {
+                      siguiente: true,
+                    },
+                  },
+                },
+              },
             },
           },
           siguientes: {
             include: {
-              siguiente: true,
+              siguiente: {
+                include: {
+                  previas: {
+                    include: {
+                      previa: true,
+                    },
+                  },
+                  siguientes: {
+                    include: {
+                      siguiente: true,
+                    },
+                  },
+                },
+              },
             },
           },
         },
       });
+
+      return data;
     }),
+  // getPreviasCacheByIds: publicProcedure
+  //   .input(ID.array())
+  //   .query(({ ctx, input }) => { }),
 });
