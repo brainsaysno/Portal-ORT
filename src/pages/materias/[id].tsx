@@ -9,10 +9,13 @@ import Arrow from "../../components/Arrow";
 import { useLocalStorage } from "hooks/useLocalStorage";
 import { arrayFromSet, parseSet } from "@utils/common";
 import MateriaButton from "@components/MateriaButton";
+import { useQueryClient } from "@tanstack/react-query";
 
 const MateriaDetail: NextPage = () => {
   const router = useRouter();
   const { id } = router.query;
+
+  const queryClient = useQueryClient();
 
   const [aprobadas, setAprobadas] = useLocalStorage(
     "idsAprobadas",
@@ -23,7 +26,39 @@ const MateriaDetail: NextPage = () => {
 
   if (isNaN(intId)) intId = 1;
 
-  const materia = api.materia.getPreviasById.useQuery({ id: intId });
+  const materia = api.materia.getPreviasById.useQuery(
+    { id: intId },
+    {
+      onSuccess(materia) {
+        if (materia) {
+          // queryClient.prefetchQuery()
+          materia.previas.map((previa) => {
+            console.log(previa);
+            queryClient.setQueryData(
+              [
+                ["materia", "getPreviasById"],
+                { input: { id: previa.previa.id }, type: "query" },
+              ],
+              previa.previa
+            );
+          });
+
+          materia.siguientes.map((siguiente) => {
+            console.log(siguiente);
+            queryClient.setQueryData(
+              [
+                ["materia", "getPreviasById"],
+                { input: { id: siguiente.siguiente.id }, type: "query" },
+              ],
+              siguiente.siguiente
+            );
+          });
+        }
+      },
+      cacheTime: Infinity,
+      refetchOnMount: "always",
+    }
+  );
 
   return (
     <>
