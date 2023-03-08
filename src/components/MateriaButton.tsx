@@ -22,7 +22,7 @@ const MateriaButton = ({
   return (
     <Link href={`/materias/${materia.id}`} className={className}>
       <div
-        className={`min-w-100 group flex rounded-md bg-white py-4 text-charcoal drop-shadow-xl 
+        className={`min-w-100 group flex rounded-md bg-white py-4 text-charcoal drop-shadow-lg
         ${hoverable ? (done ? "hover:bg-green-600" : "hover:bg-hover") : ""}
         ${done ? "bg-green-500 !text-white" : ""}
       `}
