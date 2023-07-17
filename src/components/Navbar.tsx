@@ -10,6 +10,10 @@ export default function Navbar() {
       name: "Materias",
       url: "/materias",
     },
+    {
+      name: "Carreras",
+      url: "/carreras",
+    },
   ];
 
   return (
@@ -18,12 +22,12 @@ export default function Navbar() {
         <Link href="/">
           <Logo className="w-36" />
         </Link>
-        <div className="mx-16 flex hidden items-center justify-center gap-8 md:block">
+        <div className="mx-16 flex items-center justify-start gap-8">
           {links.map((link) => (
             <Link
               key={link.url}
               href={link.url}
-              className={`text-lg ${link.url === currentPath ? "text-white" : "text-timber"
+              className={`text-lg text-white px-4 py-2 rounded-md ${link.url === currentPath ? "bg-primary-600 drop-shadow-md" : ""
                 }`}
             >
               {link.name}
