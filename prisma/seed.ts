@@ -38,6 +38,16 @@ async function main() {
         }))
     ),
   });
+
+  await prisma.previa.createMany({
+    data: materias.flatMap((materia) =>
+      faker.helpers
+        .arrayElements(materias, { min: 0, max: 5 })
+        .map((previa) => ({
+          previaId: previa.id,
+          siguienteId: materia.id,
+        })))
+    })
 }
 main()
   .then(async () => {
