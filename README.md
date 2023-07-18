@@ -129,12 +129,26 @@ Portal ORT propone ser una pagina complementaria a la [pagina de gestión](https
 3. Crea un archivo ".env" con tu url de la base de datos (con el formato de [.env.example](.env.example)):
 
    ```sh
-    echo "DATABASE_URL=\"TU-CLAVE-DE-DB\"" > .env
+   cp .env.example .env
    ```
 
-4. Correr el servidor de desarrollo:
+4. Levantar la base de datos local:
+
    ```sh
-   pnpm dev
+   docker compose up -d
+   ```
+
+5. Correr migraciones y seed de la base de datos
+
+   ```sh
+   pnpx prisma db push
+   pnpx prisma db seed
+   ```
+
+6. Levantar el servidor de desarrollo:
+
+   ```sh
+   pnpm run dev
    ```
 
 ## Funcionalidades
@@ -186,10 +200,6 @@ Si encontrás un [issue](https://github.com/brainsaysno/Portal-ORT/issues) que q
 ### Apoyo económico
 
 Si en cambio deseas apoyar económicamente a los desarrolladores de Portal ORT puedes hacerlo a través de [PayPal](https://paypal.me/brainsaysno).
-
-<!-- ## Licencia -->
-<!---->
-<!-- Distribuido bajo la licencia de MIT. Ver [licencia](LICENSE) para más información. -->
 
 ## Contacto
 
