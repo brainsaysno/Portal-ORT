@@ -28,9 +28,10 @@ model previa {
 }
 
 model carrera {
-  id       Int       @id
-  nombre   String
-  materias materia[]
+  id          Int       @id
+  nombre      String
+  descripcion String?   @db.LongText
+  materias    materia[]
 }
 
 model carreraTomateria {
