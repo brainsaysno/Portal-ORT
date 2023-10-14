@@ -28,9 +28,20 @@ model previa {
 }
 
 model carrera {
-  id       Int       @id
-  nombre   String
-  materias materia[]
+  id          Int         @id
+  nombre      String
+  descripcion String?     @db.LongText
+  materias    materia[]
+  type        CarreraType @default(OTHER)
+  imageUrl    String
+}
+
+enum CarreraType {
+  UNIVERSITY_DEGREE
+  SHORT_DEGREE
+  POSTGRADUATE
+  PROFESSIONAL_RENOVATION
+  OTHER
 }
 
 model carreraTomateria {
