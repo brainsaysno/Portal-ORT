@@ -74,57 +74,56 @@ const FacultadContainer = ({
         {title}
       </h2>
       <div className="mt-16 flex justify-center gap-4 flex-wrap">
-        <div
+        <button
           className={`text-md cursor-pointer rounded-md px-4 py-1 drop-shadow-sm w-fit ${null === selectedFilter
             ? "bg-primary text-white"
             : "bg-gray-200"
             }`}
           onClick={() => setSelectedFilter(null)}
+          type="button"
         >
           Todas
-        </div>
+        </button>
         {Object.entries(carreraTypeLabels).map(([t, l]) => (
-          <div
+          <button
             key={t}
             className={`text-md cursor-pointer rounded-md px-4 py-1 drop-shadow-sm w-fit ${t === selectedFilter
               ? "bg-primary text-white"
               : "bg-gray-200"
               }`}
             onClick={() => setSelectedFilter(t as CarreraType)}
+            type="button"
           >
             {l}
-          </div>
+          </button>
         ))}
       </div>
       <div className="my-8 flex flex-col flex-wrap items-center justify-center gap-y-4 gap-x-8 px-8 sm:flex-row sm:items-start sm:px-24">
         {filtered ? filtered.map((carrera) => (
-          <div className="min-h-xl max-w-xs rounded-md bg-gray-100 drop-shadow-md" key={carrera.id}>
-            <Link href={`/materias?carrera=${carrera.id}`}>
-              <div className="relative h-24 w-full">
-                <Image
-                  src={carrera.imageUrl}
-                  alt={`Carrera ${carrera.nombre}`}
-                  className="h-full w-full rounded-t-md"
-                  fill
-                />
-              </div>
-              <div className="my-3 px-4">
-                <h3 className="text-center text-lg font-medium">
-                  {carrera.nombre}
-                </h3>
-                <p className="mt-1 text-center text-sm">
-                  {carrera.descripcion?.slice(0, 100) || "" + (carrera.descripcion && carrera.descripcion.length > 100 ? "..." : "")}
-                </p>
-              </div>
-            </Link>
-          </div>
-        )) : (
-          <div className="my-4">
-            No hay carreras de este tipo todavía.
-          </div>
-        )
+          <Link href={`/materias?carrera=${carrera.id}`} className="min-h-xl max-w-xs rounded-md bg-gray-100 drop-shadow-md" key={carrera.id}>
+            <div className="relative h-24 w-full">
+              <Image
+                src={carrera.imageUrl}
+                alt={`Carrera ${carrera.nombre}`}
+                className="h-full w-full rounded-t-md"
+                fill
+              />
+            </div>
+            <div className="my-3 px-4">
+              <h3 className="text-center text-lg font-medium">
+                {carrera.nombre}
+              </h3>
+              <p className="mt-1 text-center text-sm">
+                {(carrera.descripcion?.slice(0, 100) || "") + (carrera.descripcion && carrera.descripcion.length > 100 ? "..." : "")}
+              </p>
+            </div>
+          </Link>
+        ))
+          :
+          <p className="-mb-8">No hay carreras de este tipo todavía</p>
         }
       </div>
+      <p className="text-center mb-8">Si queres agregar tu carrera podés <Link href="https://github.com/brainsaysno/Portal-ORT#presentarse-como-colaborador" className="text-primary-300" target="_blank">presentarte como colaborador</Link></p>
     </section>
   );
 };

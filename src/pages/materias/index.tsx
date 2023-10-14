@@ -4,7 +4,7 @@ import Layout from "../../components/Layout";
 
 import { api } from "../../utils/api";
 import Spinner from "../../components/Spinner";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { type carrera, type materia } from "@prisma/client";
 import MateriaButton from "@components/MateriaButton";
 import Select from "@components/Select";
@@ -31,8 +31,10 @@ const Materias: NextPage = () => {
   >(null);
 
   useEffect(() => {
-    if (query.carrera)
-      setIdCarreraSeleccionada(parseInt(query.carrera as string));
+    if (query.carrera) {
+      const carreraId = Number(query.carrera as string);
+      Number.isNaN(carreraId) || setIdCarreraSeleccionada(carreraId);
+    }
   }, [query.carrera]);
 
   const [searchPattern, setSearchPattern] = useState("");
@@ -48,8 +50,11 @@ const Materias: NextPage = () => {
       enabled: idCarreraSeleccionada != null,
     }
   );
+
   const carrerasQuery = api.carrera.getAll.useQuery();
 
+  // Probably will need some refactoring later. Filtering by carrera on server and pagination.
+  // As of now, with few carreras, this gives faster load times.
   const materiasQuery = api.materia.getCursables.useQuery(
     selectedFilter === Filtros.Cursables ? aprobadas : null,
     {
@@ -70,15 +75,19 @@ const Materias: NextPage = () => {
     }
   );
 
-  const selectedFilterCriteria = (materia: materia) =>
-    selectedFilter === null ||
-    (selectedFilter === Filtros.Aprobadas
-      ? aprobadas.includes(materia.id)
-      : true);
+  const filterCriteria = useCallback(
+    (materia: materia): boolean => {
+      const selectedFilterCriteria = selectedFilter === null ||
+        (selectedFilter === Filtros.Aprobadas
+          ? aprobadas.includes(materia.id)
+          : true);
 
-  const filterCriteria = (materia: materia): boolean =>
-    selectedFilterCriteria(materia) &&
-    normalizeString(materia.nombre).includes(normalizeString(searchPattern));
+      return selectedFilterCriteria &&
+      normalizeString(materia.nombre).includes(normalizeString(searchPattern))
+    }, [searchPattern, selectedFilter, aprobadas]
+  );
+
+  const filteredData = useMemo(() => materiasQuery.data?.filter(filterCriteria), [materiasQuery, filterCriteria]);
 
   return (
     <>
@@ -130,11 +139,16 @@ const Materias: NextPage = () => {
             {/* Materias */}
 
             {materiasQuery.isLoading && <Spinner className="h-12 w-12" />}
-            {materiasQuery.isSuccess && (
+            {filteredData && (filteredData.length === 0 ?
+              <div className="my-4 text-center">
+                <p>No existen materias con los filtros seleccionados</p>
+                {selectedFilter === Filtros.Aprobadas && <p>Para agregar una materia elige una y marcala como &quot;Aprobada&quot;</p>}
+              </div>
+              :
               <MateriasButtons
-                materias={materiasQuery.data.filter(filterCriteria)}
-              />
-            )}
+                materias={filteredData}
+              />)
+            }
           </div>
         </div>
       </Layout>
