@@ -27,8 +27,11 @@ export default function Navbar() {
             <Link
               key={link.url}
               href={link.url}
-              className={`text-lg text-white px-4 py-2 rounded-md ${link.url === currentPath ? "bg-primary-600 drop-shadow-md" : ""
-                }`}
+              className={`rounded-md px-4 py-2 text-lg text-white ${
+                currentPath.startsWith(link.url)
+                  ? "bg-primary-600 drop-shadow-md"
+                  : ""
+              }`}
             >
               {link.name}
             </Link>

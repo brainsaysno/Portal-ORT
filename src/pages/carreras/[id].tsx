@@ -6,6 +6,7 @@ import Layout from "../../components/Layout";
 import { api } from "../../utils/api";
 import Spinner from "../../components/Spinner";
 import Link from "next/link";
+import Image from "next/image";
 
 const CarreraDetail: NextPage = () => {
   const router = useRouter();
@@ -15,31 +16,32 @@ const CarreraDetail: NextPage = () => {
 
   if (isNaN(intId)) intId = 1;
 
-  const carrera = api.carrera.getById.useQuery(
-    { id: intId },
-  );
+  const { data: carrera, isLoading } = api.carrera.getById.useQuery({
+    id: intId,
+  });
 
   return (
     <>
       <Head>
         <title>Carrera {intId}</title>
-        <meta
-          name="description"
-          content={`Acerca de la carrera ${intId}`}
-        />
+        <meta name="description" content={`Acerca de la carrera ${intId}`} />
       </Head>
       <Layout>
-        <div className="flex flex-col items-center justify-center gap-5 py-8 px-10 py-5 md:px-36">
-          {carrera.isLoading && <Spinner className="h-12 w-12" />}
-          {carrera.data && (
+        <div className="flex flex-col items-center justify-center gap-5 py-8 px-10 md:px-36">
+          {isLoading && <Spinner className="h-12 w-12" />}
+          {carrera && (
             <>
               {
                 <div className="w-full">
                   <div className="flex flex-col items-center gap-2 md:flex-row md:flex-wrap">
-                    <section className="flex justify-center items-center">
-                      <div className="bg-gray-200 rounded-lg p-8 m-12 w-96 h-80 flex flex-col items-center">
-                        <h2 className="text-black text-2xl font-bold mb-4 text-center">{carrera.data.nombre}</h2>
-                        <p className="text-gray-600 text-center">{carrera.data.descripcion}</p>
+                    <section className="flex items-center justify-center">
+                      <div className="m-12 flex w-96 flex-col items-center rounded-lg bg-gray-200 p-8">
+                        <h2 className="mb-4 text-center text-2xl font-medium text-black">
+                          {carrera.nombre}
+                        </h2>
+                        <p className="text-center text-gray-600">
+                          {carrera.descripcion}
+                        </p>
                       </div>
                       <div>
                         <ul className="list-disc text-lg">
