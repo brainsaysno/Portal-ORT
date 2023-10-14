@@ -6,7 +6,7 @@ import { api } from "../../utils/api";
 import Spinner from "../../components/Spinner";
 import { CarreraType, type carrera } from "@prisma/client";
 import Header from "@components/Header";
-import { PropsWithChildren, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -59,7 +59,8 @@ const FacultadContainer = ({
 
   const byFilter = useMemo(() => carreras.reduce((acc, c) => {
     acc[c.type] ??= [];
-    acc[c.type]!.push(c)
+    // non null by design
+    acc[c.type]?.push(c)
     return acc;
   }, {} as Record<CarreraType, carrera[] | undefined>), [carreras])
 
@@ -112,7 +113,7 @@ const FacultadContainer = ({
                   {carrera.nombre}
                 </h3>
                 <p className="mt-1 text-center text-sm">
-                  {carrera.descripcion?.slice(0, 80) + (carrera.descripcion && carrera.descripcion.length > 80 ? "..." : "")}
+                  {carrera.descripcion?.slice(0, 100) || "" + (carrera.descripcion && carrera.descripcion.length > 100 ? "..." : "")}
                 </p>
               </div>
             </Link>

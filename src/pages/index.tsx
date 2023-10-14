@@ -33,6 +33,7 @@ const Home: NextPage = () => {
               <Link
                 className="min-w-100 rounded-md bg-white px-4 py-4 text-charcoal drop-shadow-xl"
                 href={href}
+                key={href}
               >
                 {label}
               </Link>

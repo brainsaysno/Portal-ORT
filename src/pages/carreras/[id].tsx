@@ -6,7 +6,6 @@ import Layout from "../../components/Layout";
 import { api } from "../../utils/api";
 import Spinner from "../../components/Spinner";
 import Link from "next/link";
-import Image from "next/image";
 
 const CarreraDetail: NextPage = () => {
   const router = useRouter();
