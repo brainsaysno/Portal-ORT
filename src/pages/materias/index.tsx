@@ -4,14 +4,13 @@ import Layout from "../../components/Layout";
 
 import { api } from "../../utils/api";
 import Spinner from "../../components/Spinner";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { type carrera, type materia } from "@prisma/client";
 import MateriaButton from "@components/MateriaButton";
 import Select from "@components/Select";
 import { useLocalStorage } from "hooks/useLocalStorage";
 import Header from "@components/Header";
 import { useRouter } from "next/router";
-import Link from "next/link";
 
 const normalizeString = (str: string): string =>
   str
@@ -76,17 +75,19 @@ const Materias: NextPage = () => {
     }
   );
 
-  const selectedFilterCriteria = (materia: materia) =>
-    selectedFilter === null ||
-    (selectedFilter === Filtros.Aprobadas
-      ? aprobadas.includes(materia.id)
-      : true);
+  const filterCriteria = useCallback(
+    (materia: materia): boolean => {
+      const selectedFilterCriteria = selectedFilter === null ||
+        (selectedFilter === Filtros.Aprobadas
+          ? aprobadas.includes(materia.id)
+          : true);
 
-  const filterCriteria = (materia: materia): boolean =>
-    selectedFilterCriteria(materia) &&
-    normalizeString(materia.nombre).includes(normalizeString(searchPattern));
+      return selectedFilterCriteria &&
+      normalizeString(materia.nombre).includes(normalizeString(searchPattern))
+    }, [searchPattern, selectedFilter, aprobadas]
+  );
 
-  const filteredData = useMemo(() => materiasQuery.data?.filter(filterCriteria), [materiasQuery]);
+  const filteredData = useMemo(() => materiasQuery.data?.filter(filterCriteria), [materiasQuery, filterCriteria]);
 
   return (
     <>
@@ -141,7 +142,7 @@ const Materias: NextPage = () => {
             {filteredData && (filteredData.length === 0 ?
               <div className="my-4 text-center">
                 <p>No existen materias con los filtros seleccionados</p>
-                {selectedFilter === Filtros.Aprobadas && <p>Para agregar una materia elige una y marcala como "Aprobada"</p>}
+                {selectedFilter === Filtros.Aprobadas && <p>Para agregar una materia elige una y marcala como &quot;Aprobada&quot;</p>}
               </div>
               :
               <MateriasButtons
