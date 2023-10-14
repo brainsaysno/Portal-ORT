@@ -64,7 +64,7 @@
       <li><a href="#apoyo-economico">Apoyo económico</a></li>
       </ul>
     </li>
-    <!-- <li><a href="#licencia">Licencia</a></li> -->
+    <li><a href="#licencia">Licencia</a></li>
     <li><a href="#contacto">Contacto</a></li>
   </ol>
 </details>
@@ -92,8 +92,10 @@ Portal ORT propone ser una pagina complementaria a la [pagina de gestión](https
 - [Typescript](https://www.typescriptlang.org/)
 - [Next.js](https://nextjs.org)
 - [Prisma](https://prisma.io)
-- [Tailwind CSS](https://tailwindcss.com)
 - [tRPC](https://trpc.io)
+- [Zod](https://zod.dev/)
+- [Tailwind CSS](https://tailwindcss.com)
+- [Headless UI](https://headlessui.com/)
 - [Vitest](https://vitest.dev/)
 - [PlanetScale](https://planetscale.com/)
 - [Vercel](https://vercel.com/home)
@@ -200,6 +202,10 @@ Si encontrás un [issue](https://github.com/brainsaysno/Portal-ORT/issues) que q
 ### Apoyo económico
 
 Si en cambio deseas apoyar económicamente a los desarrolladores de Portal ORT puedes hacerlo a través de [PayPal](https://paypal.me/brainsaysno).
+
+## Licencia
+
+Distribuido bajo la licencia GPL-3.0. Ver [licencia](LICENSE) para más información.
 
 ## Contacto
 

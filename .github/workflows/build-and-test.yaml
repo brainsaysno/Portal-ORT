@@ -2,8 +2,6 @@ name: Portal ORT CI
 run-name: ${{ github.actor }} is building and testing a PR on ${{ github.ref_name }}
 
 on:
-  push:
-    branches: [main]
   pull_request:
     branches: [main]
 
