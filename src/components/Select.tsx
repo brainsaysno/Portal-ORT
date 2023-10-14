@@ -10,15 +10,17 @@ export default function Select<T>({
   items,
   renderLabel,
   onChange,
+  defaultValue = null,
   defaultLabel,
 }: {
   items: [T, ...T[]];
   renderLabel: (item: T) => string;
   onChange: (selected: T | null) => void;
+  defaultValue?: T | null;
   defaultLabel?: string;
 }) {
   const [selected, setSelected] = useState<T | null>(
-    defaultLabel ? null : items[0]
+    defaultValue || (defaultLabel ? null : items[0])
   );
 
   useEffect(() => {

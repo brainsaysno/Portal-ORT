@@ -4,11 +4,13 @@ import Layout from "../../components/Layout";
 
 import { api } from "../../utils/api";
 import Spinner from "../../components/Spinner";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { type carrera, type materia } from "@prisma/client";
 import MateriaButton from "@components/MateriaButton";
 import Select from "@components/Select";
 import { useLocalStorage } from "hooks/useLocalStorage";
+import Header from "@components/Header";
+import { useRouter } from "next/router";
 
 const normalizeString = (str: string): string =>
   str
@@ -22,9 +24,16 @@ const enum Filtros {
 }
 
 const Materias: NextPage = () => {
+  const { query } = useRouter();
+
   const [idCarreraSeleccionada, setIdCarreraSeleccionada] = useState<
     number | null
   >(null);
+
+  useEffect(() => {
+    if (query.carrera)
+      setIdCarreraSeleccionada(parseInt(query.carrera as string));
+  }, [query.carrera]);
 
   const [searchPattern, setSearchPattern] = useState("");
   const [selectedFilter, setSelectedFilter] = useState<Filtros | null>(null);
@@ -79,9 +88,7 @@ const Materias: NextPage = () => {
       </Head>
       <Layout>
         <div>
-          <h1 className="text-md h-fit bg-white py-2 text-center text-charcoal drop-shadow-lg">
-            Materias
-          </h1>
+          <Header title="Materias" />
           <div className="flex h-full flex-col items-center gap-5 px-10 py-5 md:px-36">
             {/* Filter tab */}
 
@@ -90,6 +97,11 @@ const Materias: NextPage = () => {
                 <Select
                   items={carrerasQuery.data as [carrera, ...carrera[]]}
                   renderLabel={(carrera) => carrera.nombre}
+                  defaultValue={
+                    carrerasQuery.data.find(
+                      (c) => c.id === Number(query.carrera)
+                    ) || null
+                  }
                   onChange={(carrera) =>
                     setIdCarreraSeleccionada(carrera ? carrera.id : null)
                   }

@@ -6,6 +6,8 @@ async function main() {
   const carreras = Array.from({ length: 10 }, () => ({
     id: faker.number.int({ min: 1000, max: 9999 }),
     nombre: faker.person.jobTitle(),
+    descripcion: faker.lorem.paragraph(),
+    imageUrl: `https://picsum.photos/id/${faker.number.int({max: 4000})}/320/96`
   }));
   await prisma.carrera.createMany({
     data: carreras,
