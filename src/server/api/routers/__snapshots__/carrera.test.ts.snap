@@ -2,7 +2,9 @@
 
 exports[`Carrera router > byId 1`] = `
 {
+  "descripcion": "Desarrollate como creador de software y conseguí las herramientas para construir soluciones innovadoras en uno de los sectores con mayor demanda en Uruguay y en el mundo.",
   "id": 2485,
+  "imageUrl": "https://fi.ort.edu.uy/innovaportal/file/95676/1/ingenieria-en-sistemas-facultad-de-ingenieria.jpg",
   "materias": [
     {
       "id": 1410,
@@ -450,5 +452,6 @@ exports[`Carrera router > byId 1`] = `
     },
   ],
   "nombre": "Ingeniería en Sistemas",
+  "type": "UNIVERSITY_DEGREE",
 }
 `;
