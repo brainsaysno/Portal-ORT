@@ -179,7 +179,7 @@ Además de darle una estrella al proyecto, **hay 4 formas principales de contrib
 
 ### Presentarse como colaborador
 
-Estamos buscando colaboradores de distintas carreras para recuperar diversos datos sobre materias y cursos de la facultad y así seguir ampliando las funcionalidades del portal. Si te interesa colaborar puedes mandar un [mail](mailto:nicolas.russo.ortiz@gmail.com?subject=Colaborador%20Portal%20ORT%20-%20NOMBRE_DE_CARRERA) con el asunto "Colaborador Portal ORT - NOMBRE_DE_CARRERA" incluyendo el nombre de la carrera que estás cursando.
+Estamos buscando colaboradores de distintas carreras para recuperar diversos datos sobre materias y cursos de la facultad y así seguir ampliando las funcionalidades del portal. Si te interesa colaborar puedes mandar un [mail](mailto:nrusso@nrusso.dev?subject=Colaborador%20Portal%20ORT%20-%20NOMBRE_DE_CARRERA) con el asunto "Colaborador Portal ORT - NOMBRE_DE_CARRERA" incluyendo el nombre de la carrera que estás cursando.
 
 ### Proponer mejoras o reportar errores
 
@@ -209,7 +209,7 @@ Distribuido bajo la licencia GPL-3.0. Ver [licencia](LICENSE) para más informac
 
 ## Contacto
 
-Nicolás Russo - [@nicoo_182](https://instagram.com/nicoo_182) - nicolas.russo.ortiz@gmail.com
+Nicolás Russo - [nrusso@nrusso.dev](nrusso@nrusso.dev)
 
 Link del proyecto: [https://github.com/brainsaysno/Portal-ORT](https://github.com/brainsaysno/Portal-ORT)
 
