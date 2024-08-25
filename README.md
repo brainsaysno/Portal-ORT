@@ -22,7 +22,7 @@
     <a href="https://github.com/brainsaysno/Portal-ORT"><strong>Explorar la documentación »</strong></a>
     <br />
     <br />
-    <a href="https://portalort.vercel.app/">Ir al sitio</a>
+    <a href="https://portalort.com/">Ir al sitio</a>
     ·
     <a href="https://github.com/brainsaysno/Portal-ORT/issues/new?labels=enhancement">Proponer mejora</a>
     ·
@@ -155,11 +155,11 @@ Portal ORT propone ser una pagina complementaria a la [pagina de gestión](https
 
 ## Funcionalidades
 
-### [Inspeccionar materias](https://portalort.vercel.app/materias)
+### [Inspeccionar materias](https://portalort.com/materias)
 
 La pagina permite inspeccionar las materias de la universidad, filtrando por carrera y por un término de búsqueda.
 
-### [Ver previas de materias](https://portalort.vercel.app/materias)
+### [Ver previas de materias](https://portalort.com/materias)
 
 Desde esta página al seleccionar una materia se permite ver las previas y las siguientes (materias de las que esta es previa) de esta.
 
