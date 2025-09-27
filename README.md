@@ -22,7 +22,7 @@
     <a href="https://github.com/brainsaysno/Portal-ORT"><strong>Explorar la documentación »</strong></a>
     <br />
     <br />
-    <a href="https://portalort.com/">Ir al sitio</a>
+    <a href="https://portalort.nrusso.dev/">Ir al sitio</a>
     ·
     <a href="https://github.com/brainsaysno/Portal-ORT/issues/new?labels=enhancement">Proponer mejora</a>
     ·
